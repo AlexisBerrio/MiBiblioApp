@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Mi BiblioApp</string>
+    <string name="registro">Registro</string>
+    <string name="nombre">Nombre</string>
+    <string name="correo">Correo Electrónico</string>
+    <string name="telefono">Teléfono</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="rep_contraseña">Repetir Contraseña</string>
+    <string name="genero">Género</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+    <string name="registrar">Registrar</string>
+    <string name="respuesta">Nombre: %s \nCorreo: %s \nTeléfono: %s \nGénero: %s </string>
+    <string name="error_contrasena">Las contraseñas no coinciden</string>
+    <string name="registro_guardado">Registro guardado</string>
+    <string name="campo_vacio">El campo no puede estar vacío</string>
+    <string name="login">LOGIN</string>
+    <string name="nulo" />
+    <string name="no_cuenta">No tengo una cuenta</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="contrasenacorta">La contraseña debe tener mínimo 6 dígitos</string>
+    <string name="datos_erroneos">El usuario y la contraseña no coinciden con los registros. Por favor, intente de nuevo.</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="usuario">Usuario:</string>
+</resources>
