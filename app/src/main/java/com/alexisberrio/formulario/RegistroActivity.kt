@@ -2,7 +2,6 @@
 Formulario app
 Created by:
             Alexis Berrio Arenas
-            Dario Fernando Arévalo
  */
 
 package com.alexisberrio.formulario
