@@ -6,6 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
+/*
+My BiblioApp
+Created by:
+            Alexis Berrio Arenas
+ */
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var mail:String

@@ -1,3 +1,8 @@
+/*
+My BiblioApp
+Created by:
+            Alexis Berrio Arenas
+ */
 package com.alexisberrio.formulario
 
 import android.content.Intent
@@ -40,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this, LoginActivity::class.java)
