@@ -15,16 +15,19 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // Take and save current user information
         val datosrecibidos = intent.extras
         mail = datosrecibidos?.getString("correo").toString()
         pass = datosrecibidos?.getString("contraseña").toString()
 
+        // Go to RegistroActivity when button is pressed
         registrase_button.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
             finish()
         }
 
+        // Go to MainActivity when button Login is pressed and credentials ok
         login_button.setOnClickListener {
             val correoLogin = correo_editTextTextEmailAddress.text.toString()
             val contrasenaLogin = contrasena_editTextTextPassword.text.toString()
@@ -40,6 +43,7 @@ class LoginActivity : AppCompatActivity() {
                 intent.putExtra("correo", correoLogin)
                 intent.putExtra("contraseña", contrasenaLogin)
                 startActivity(intent)
+                finish()
             }
         }
     }

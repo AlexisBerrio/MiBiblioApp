@@ -45,7 +45,7 @@ class RegistroActivity : AppCompatActivity() {
                     getString(R.string.campo_vacio)
 
 
-                // If any error, display the new user information
+                // If any error, send user information and go to Login
                 else -> {
                     contraseña_edit_text.error = null
 
@@ -66,6 +66,7 @@ class RegistroActivity : AppCompatActivity() {
 
     }
 
+    // Go to Login
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this, LoginActivity::class.java)
