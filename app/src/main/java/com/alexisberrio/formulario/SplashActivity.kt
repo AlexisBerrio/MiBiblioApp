@@ -6,6 +6,7 @@ Created by:
 package com.alexisberrio.formulario
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import java.util.*
@@ -27,9 +28,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
     // Ends this activity and goes to Login
-    fun goToLoginActivity() {
+    private fun goToLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
-        finish()
+
     }
 }

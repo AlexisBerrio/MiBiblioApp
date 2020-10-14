@@ -7,6 +7,7 @@ Created by:
 package com.alexisberrio.formulario
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -57,8 +58,8 @@ class RegistroActivity : AppCompatActivity() {
                     val intent = Intent(this, LoginActivity::class.java)
                     intent.putExtra("correo", correo)
                     intent.putExtra("contraseña", contrasena)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
                     startActivity(intent)
-                    finish()
                 }
             }
         }
@@ -69,8 +70,8 @@ class RegistroActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         val intent = Intent(this, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
-        finish()
     }
 
 }
