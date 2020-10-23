@@ -5,6 +5,7 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.alexisberrio.formulario.bottom.BottomActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 /*
@@ -45,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, BottomActivity::class.java)
                 intent.putExtra("correo", correoLogin)
                 intent.putExtra("contraseña", contrasenaLogin)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)

@@ -25,4 +25,6 @@
     <string name="prestamo">Préstamo</string>
     <string name="novedades">Novedades</string>
     <string name="encuentranos">Encuéntranos</string>
+    <string name="mi_perfil">Mi perfil</string>
+    <string name="title_activity_bottom">bottom</string>
 </resources>

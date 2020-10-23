@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/navigation_novedades">
+
+
+    <fragment
+        android:id="@+id/navigation_encuentranos"
+        android:name="com.alexisberrio.formulario.fragments.EncuentranosFragment"
+        android:label="@string/encuentranos"
+        tools:layout="@layout/fragment_encuentranos" />
+    <fragment
+        android:id="@+id/navigation_novedades"
+        android:name="com.alexisberrio.formulario.fragments.NovedadesFragment"
+        android:label="@string/novedades"
+        tools:layout="@layout/fragment_novedades" />
+    <fragment
+        android:id="@+id/navigation_prestamo"
+        android:name="com.alexisberrio.formulario.fragments.PrestamoFragment"
+        android:label="@string/prestamo"
+        tools:layout="@layout/fragment_prestamo" />
+    <fragment
+        android:id="@+id/navigation_perfil"
+        android:name="com.alexisberrio.formulario.fragments.PerfilFragment"
+        android:label="@string/mi_perfil"
+        tools:layout="@layout/fragment_perfil" />
+</navigation>
