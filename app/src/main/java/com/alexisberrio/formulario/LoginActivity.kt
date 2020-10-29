@@ -36,8 +36,8 @@ class LoginActivity : AppCompatActivity() {
 
         // Go to MainActivity when button Login is pressed and credentials ok
         login_button.setOnClickListener {
-            val correoLogin = correo_editTextTextEmailAddress.text.toString()
-            val contrasenaLogin = contrasena_editTextTextPassword.text.toString()
+            val correoLogin = correo_textInputEditText.text.toString()
+            val contrasenaLogin = contrasena_textInputEditText.text.toString()
 
             if (correoLogin != mail || contrasenaLogin != pass) {
                 Toast.makeText(

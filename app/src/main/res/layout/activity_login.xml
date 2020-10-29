@@ -4,108 +4,102 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:attr/windowBackground"
+    android:background="@drawable/login_background"
     tools:context=".LoginActivity">
 
-    <EditText
-        android:id="@+id/correo_editTextTextEmailAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="32dp"
-        android:drawableEnd="@drawable/baseline_email_black_36dp"
-        android:ems="10"
-        android:hint="@string/nulo"
-        android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
+        android:layout_marginBottom="128dp"
+        android:alwaysDrawnWithCache="false"
+        android:animateLayoutChanges="false"
+        android:animationCache="false"
+        android:background="@color/Background"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo_textView" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/correo_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/correo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/icono_imageView" />
+        <ImageView
+            android:id="@+id/icono_imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/icono_512px"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/contrasena_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:text="@string/contraseña"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/correo_editTextTextEmailAddress" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/correo_textInputLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:hintTextColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icono_imageView">
 
-    <EditText
-        android:id="@+id/contrasena_editTextTextPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:drawableEnd="@drawable/baseline_lock_black_36dp"
-        android:ems="10"
-        android:hint="@string/nulo"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contrasena_textView" />
 
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@android:dimen/notification_large_icon_height"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="@android:dimen/notification_large_icon_height"
-        android:background="@android:drawable/editbox_background_normal"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/login"
-        android:textColor="@color/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/contrasena_editTextTextPassword" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/correo_textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/correo" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/registrase_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="64dp"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/registrarse"
-        android:textColor="@color/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contrasena_textInputLayout3"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            app:boxStrokeColor="@color/colorAccent"
+            app:hintTextColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/correo_textInputLayout">
 
-    <ImageView
-        android:id="@+id/icono_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
-        tools:ignore="ContentDescription" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/contrasena_textInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/contraseña" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@android:dimen/notification_large_icon_height"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@android:dimen/notification_large_icon_height"
+            android:background="@android:drawable/editbox_background_normal"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/login"
+            android:textColor="@color/ic_launcher_background"
+            app:elevation="24dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/registrase_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="64dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/registrarse"
+            android:textColor="@color/ic_launcher_background"
+            app:elevation="24dp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
