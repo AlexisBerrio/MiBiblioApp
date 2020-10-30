@@ -7,99 +7,116 @@
     android:background="@drawable/login_background"
     tools:context=".LoginActivity">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="128dp"
-        android:alwaysDrawnWithCache="false"
-        android:animateLayoutChanges="false"
-        android:animationCache="false"
         android:background="@color/Background"
+        android:backgroundTint="@color/Background"
         android:orientation="vertical"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/icono_imageView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/icono_512px"
-            tools:ignore="ContentDescription" />
+            android:layout_height="match_parent"
+            android:background="@color/Background"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/correo_textInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
-            app:boxStrokeColor="@color/colorAccent"
-            app:hintTextColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icono_imageView">
-
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/correo_textInputEditText"
+            <ImageView
+                android:id="@+id/icono_imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/correo" />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:srcCompat="@drawable/icono_512px"
+                tools:ignore="ContentDescription" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/contrasena_textInputLayout3"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="32dp"
-            app:boxStrokeColor="@color/colorAccent"
-            app:hintTextColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/correo_textInputLayout">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/contrasena_textInputEditText"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/correo_textInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/contraseña" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:textColorHint="@color/colorAccent"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:hintTextColor="@color/colorPrimaryDark"
+                app:startIconDrawable="@drawable/baseline_email_black_36dp"
+                app:startIconTint="@android:color/black">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@android:dimen/notification_large_icon_height"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="@android:dimen/notification_large_icon_height"
-            android:background="@android:drawable/editbox_background_normal"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/login"
-            android:textColor="@color/ic_launcher_background"
-            app:elevation="24dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/registrase_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="64dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/registrarse"
-            android:textColor="@color/ic_launcher_background"
-            app:elevation="24dp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/correo_textInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/correo"
+                    android:inputType="textEmailAddress"
+                    android:shadowRadius="8"
+                    android:textColor="@android:color/black"
+                    android:textColorHighlight="@color/colorAccent"
+                    android:textColorHint="@color/colorAccent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/contrasena_textInputLayout3"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/colorAccent"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeColor="@color/colorAccent"
+                app:hintTextColor="@color/colorPrimaryDark"
+                app:startIconDrawable="@drawable/baseline_lock_black_36dp"
+                app:startIconTint="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contrasena_textInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/contraseña"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/login"
+                android:textColor="@color/ic_launcher_background"
+                app:cornerRadius="8dp"
+                app:elevation="4dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/registrase_button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/registrarse"
+                android:textColor="@color/ic_launcher_background"
+                app:cornerRadius="8dp"
+                app:elevation="4dp" />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
