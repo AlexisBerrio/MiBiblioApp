@@ -16,11 +16,5 @@ class NovedadesFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_novedades, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    companion object {
-
-    }
+    companion object
 }
