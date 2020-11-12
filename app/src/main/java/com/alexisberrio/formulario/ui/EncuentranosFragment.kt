@@ -1,4 +1,4 @@
-package com.alexisberrio.formulario.fragments
+package com.alexisberrio.formulario.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,11 +17,5 @@ class EncuentranosFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_encuentranos, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    companion object {
-
-    }
+    companion object
 }

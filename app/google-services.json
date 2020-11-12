@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "787017661842",
+    "firebase_url": "https://mi-biblioapp.firebaseio.com",
+    "project_id": "mi-biblioapp",
+    "storage_bucket": "mi-biblioapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787017661842:android:a0fb99319e27a4e60ad54b",
+        "android_client_info": {
+          "package_name": "com.alexisberrio.formulario"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787017661842-kk98pu8ctclscmgrecv08j8rg071bgf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwX-K2U8Aabess0-qnxEBfU9bwZM8C3Bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787017661842-kk98pu8ctclscmgrecv08j8rg071bgf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

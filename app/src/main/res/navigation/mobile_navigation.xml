@@ -8,22 +8,22 @@
 
     <fragment
         android:id="@+id/navigation_encuentranos"
-        android:name="com.alexisberrio.formulario.fragments.EncuentranosFragment"
+        android:name="com.alexisberrio.formulario.ui.EncuentranosFragment"
         android:label="@string/encuentranos"
         tools:layout="@layout/fragment_encuentranos" />
     <fragment
         android:id="@+id/navigation_novedades"
-        android:name="com.alexisberrio.formulario.fragments.NovedadesFragment"
+        android:name="com.alexisberrio.formulario.ui.novedades.NovedadesFragment"
         android:label="@string/novedades"
         tools:layout="@layout/fragment_novedades" />
     <fragment
         android:id="@+id/navigation_prestamo"
-        android:name="com.alexisberrio.formulario.fragments.PrestamoFragment"
+        android:name="com.alexisberrio.formulario.ui.PrestamoFragment"
         android:label="@string/prestamo"
         tools:layout="@layout/fragment_prestamo" />
     <fragment
         android:id="@+id/navigation_perfil"
-        android:name="com.alexisberrio.formulario.fragments.PerfilFragment"
+        android:name="com.alexisberrio.formulario.ui.perfil.PerfilFragment"
         android:label="@string/mi_perfil"
         tools:layout="@layout/fragment_perfil" />
 </navigation>

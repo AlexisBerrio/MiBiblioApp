@@ -1,4 +1,4 @@
-package com.alexisberrio.formulario.bottom
+package com.alexisberrio.formulario.ui.bottom
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alexisberrio.formulario.R
-import com.alexisberrio.formulario.fragments.PerfilFragment
+import com.alexisberrio.formulario.ui.perfil.PerfilFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 

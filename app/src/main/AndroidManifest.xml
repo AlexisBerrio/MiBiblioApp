@@ -9,17 +9,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".bottom.BottomActivity"
+            android:name="com.alexisberrio.formulario.ui.bottom.BottomActivity"
             android:label="@string/title_activity_bottom">
 
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.alexisberrio.formulario.ui.login.LoginActivity"
             android:theme="@style/NoActionBar" />
 
         <activity
-            android:name=".SplashActivity"
+            android:name="com.alexisberrio.formulario.ui.splash.SplashActivity"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,9 @@
 
         </activity>
 
-        <activity android:name=".RegistroActivity" />
+        <activity
+            android:name="com.alexisberrio.formulario.ui.registro.RegistroActivity"
+            android:theme="@style/NoActionBar" />
 
     </application>
 
