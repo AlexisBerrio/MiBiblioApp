@@ -18,9 +18,9 @@
         tools:layout="@layout/fragment_novedades" />
     <fragment
         android:id="@+id/navigation_prestamo"
-        android:name="com.alexisberrio.formulario.ui.PrestamoFragment"
+        android:name="com.alexisberrio.formulario.ui.libros.LibrosFragment"
         android:label="@string/prestamo"
-        tools:layout="@layout/fragment_prestamo" />
+        tools:layout="@layout/fragment_libros" />
     <fragment
         android:id="@+id/navigation_perfil"
         android:name="com.alexisberrio.formulario.ui.perfil.PerfilFragment"

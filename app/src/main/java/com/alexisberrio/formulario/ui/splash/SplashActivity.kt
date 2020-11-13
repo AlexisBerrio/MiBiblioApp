@@ -18,13 +18,11 @@ import com.alexisberrio.formulario.ui.bottom.BottomActivity
 import com.alexisberrio.formulario.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
-// TODO Cambiar transición de la actividad
-
 class SplashActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySplashBinding
-    var anim: Animation? = null
-    lateinit var auth: FirebaseAuth
+    private var anim: Animation? = null
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +55,7 @@ class SplashActivity : AppCompatActivity() {
         val intent = Intent(this, BottomActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+        overridePendingTransition(R.anim.zoom_in, R.anim.static_animation)
     }
 
     // Ends this activity and goes to Login
@@ -64,6 +63,7 @@ class SplashActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+        overridePendingTransition(R.anim.zoom_in, R.anim.static_animation)
 
     }
 }
