@@ -1,5 +1,6 @@
 package com.alexisberrio.formulario.ui.novedades
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,11 @@ import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.data.server.Novedades
 import com.alexisberrio.formulario.databinding.NovedadesItemBinding
 import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-class NovedadesRVAdapter(var novedadesList: ArrayList<Novedades>) :
+class NovedadesRVAdapter(private var novedadesList: ArrayList<Novedades>) :
     RecyclerView.Adapter<NovedadesRVAdapter.NovedadesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NovedadesViewHolder {
@@ -33,12 +36,28 @@ class NovedadesRVAdapter(var novedadesList: ArrayList<Novedades>) :
 
         private val binding = NovedadesItemBinding.bind(itemView)
 
+
         fun bindNovedad(novedad: Novedades) {
 
+
+            val finalDate: String = unixDateToString(novedad)
+
             Glide.with(itemView).load(novedad.imagen).into(binding.novedadImageView)
-
             binding.tituloTextView.text = novedad.nombre
+            binding.fechaTextView.text = finalDate
+            binding.tipoTextView.text = novedad.tipo
+            binding.descripcionTextView.text = novedad.descripcion
 
+        }
+
+        @SuppressLint("SimpleDateFormat")
+        private fun unixDateToString(novedad: Novedades): String {
+            val unixSeconds = novedad.fecha
+            //Segundos a milisegundos
+            val date = Date(unixSeconds * 1000L)
+            // Formato de la fecha
+            val jdf = SimpleDateFormat("dd-MMM-yyy HH:mm a")
+            return jdf.format(date)
         }
     }
 

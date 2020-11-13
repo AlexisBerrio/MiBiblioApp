@@ -18,6 +18,7 @@ import com.alexisberrio.formulario.ui.bottom.BottomActivity
 import com.alexisberrio.formulario.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 
+// TODO Cambiar transición de la actividad
 
 class SplashActivity : AppCompatActivity() {
 

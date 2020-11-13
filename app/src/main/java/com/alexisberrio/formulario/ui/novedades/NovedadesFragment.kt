@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.data.server.Novedades
 import com.alexisberrio.formulario.databinding.FragmentNovedadesBinding
+
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
