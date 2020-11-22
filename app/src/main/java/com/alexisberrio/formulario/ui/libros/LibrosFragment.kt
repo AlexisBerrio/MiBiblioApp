@@ -42,6 +42,7 @@ class LibrosFragment : Fragment() {
 
         cargarDesdeFirebase()
         librosRVAdapter.notifyDataSetChanged()
+
     }
 
     private fun cargarDesdeFirebase() {

@@ -10,6 +10,7 @@ import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.os.Bundle
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.alexisberrio.formulario.R
@@ -56,6 +57,10 @@ class SplashActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
         overridePendingTransition(R.anim.zoom_in, R.anim.static_animation)
+        Toast.makeText(
+            baseContext, "Saludos ${auth.currentUser?.email}",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     // Ends this activity and goes to Login

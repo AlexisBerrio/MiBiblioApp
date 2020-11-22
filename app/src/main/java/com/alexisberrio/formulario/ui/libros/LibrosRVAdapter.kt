@@ -1,8 +1,11 @@
 package com.alexisberrio.formulario.ui.libros
 
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isGone
 import androidx.recyclerview.widget.RecyclerView
 import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.data.server.Libros
@@ -34,7 +37,32 @@ class LibrosRVAdapter(private var librosList: ArrayList<Libros>) :
 
             binding.autorLibroTextView.text = libro.autor
             binding.tituloLibroTextView.text = libro.titulo
+            binding.yearTextView.text = libro.anio.toString()
+            binding.sinopsisTextView.text = libro.sinopsis
+
             Glide.with(itemView).load(libro.portada).into(binding.libroImageView)
+
+            binding.showMoreButton.setOnClickListener {
+                if (binding.showMoreConstraint.isGone) {
+                    TransitionManager.beginDelayedTransition(
+                        binding.prestamosCardView,
+                        AutoTransition()
+                    )
+                    binding.showMoreConstraint.visibility = View.VISIBLE
+                    binding.showMoreButton.setImageResource(R.drawable.baseline_arrow_up)
+                } else {
+                    TransitionManager.beginDelayedTransition(
+                        binding.prestamosCardView,
+                        AutoTransition()
+                    )
+                    binding.showMoreConstraint.visibility = View.GONE
+                    binding.showMoreButton.setImageResource(R.drawable.baseline_arrow_down)
+
+                }
+
+            }
         }
+
     }
+
 }

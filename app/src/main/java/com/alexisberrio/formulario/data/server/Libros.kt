@@ -6,4 +6,7 @@ class Libros {
     val anio: Int = 0
     val autor: String = ""
     val portada: String = ""
+    val prestado: Boolean = false
+    val userPrestamo: String = " "
+    val sinopsis: String = ""
 }
