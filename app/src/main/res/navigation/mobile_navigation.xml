@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigation_encuentranos"
-        android:name="com.alexisberrio.formulario.ui.EncuentranosFragment"
+        android:name="com.alexisberrio.formulario.ui.maps.EncuentranosFragment"
         android:label="@string/encuentranos"
         tools:layout="@layout/fragment_encuentranos" />
     <fragment

@@ -1,4 +1,4 @@
-package com.alexisberrio.formulario.ui
+package com.alexisberrio.formulario.ui.maps
 
 import android.os.Bundle
 import android.view.LayoutInflater
