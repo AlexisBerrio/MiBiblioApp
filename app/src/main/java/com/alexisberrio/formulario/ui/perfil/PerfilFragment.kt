@@ -10,6 +10,10 @@ import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.databinding.FragmentPerfilBinding
 import com.alexisberrio.formulario.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class PerfilFragment : Fragment() {
 
@@ -28,6 +32,34 @@ class PerfilFragment : Fragment() {
         binding = FragmentPerfilBinding.bind(view)
 
         auth = FirebaseAuth.getInstance()
+        val otro = auth.currentUser?.uid
+
+        val database = FirebaseDatabase.getInstance()
+        val myUserRef =
+            database.getReference("usuarios").orderByChild("id").equalTo(otro)
+        myUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach { childSnapshot ->
+
+                    binding.correoTextView.text =
+                        childSnapshot.child("correo").getValue(String::class.java)
+                    binding.nombreTextView.text =
+                        childSnapshot.child("nombre").getValue(String::class.java)
+                    if (childSnapshot.child("genero").getValue(String::class.java) == "Masculino") {
+                        binding.caraImageView.setImageResource(R.drawable.man)
+                    } else {
+                        binding.caraImageView.setImageResource(R.drawable.ic_girl)
+                    }
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+
+        })
 
         binding.cerrarSesionButton.setOnClickListener {
             auth.signOut()
@@ -35,9 +67,11 @@ class PerfilFragment : Fragment() {
         }
     }
 
+
     private fun goToLoginActivity() {
         val intent = Intent(this@PerfilFragment.context, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
+
 } 
