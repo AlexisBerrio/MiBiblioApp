@@ -14,9 +14,9 @@
     <string name="error_contrasena">Las contraseñas no coinciden</string>
     <string name="registro_guardado">Registro guardado</string>
     <string name="campo_vacio">El campo no puede estar vacío</string>
-    <string name="login">LOGIN</string>
+    <string name="login">INICIAR SESIÓN</string>
+    <string name="login_with_google">INICIAR SESIÓN CON GOOGLE</string>
     <string name="nulo" />
-    <string name="no_cuenta">No tengo una cuenta</string>
     <string name="registrarse">Registrarse</string>
     <string name="contrasenacorta">La contraseña debe tener mínimo 6 dígitos</string>
     <string name="datos_erroneos">El usuario y la contraseña no coinciden con los registros. Por favor, intente de nuevo.</string>
@@ -32,4 +32,14 @@
     <string name="reservar">Reservar</string>
     <string name="historial">Historial de préstamos</string>
     <string name="map_descripcion">En este apartado encontrará la ubicación de las bibliotecas que están vinculadas a nuestra red.</string>
+    <string name="buscar_autor_o_titulo">Buscar por título o autor</string>
+    <string name="estado">Estado:</string>
+    <string name="en_prestamo">En préstamo</string>
+    <string name="disponible">Disponible</string>
+    <string name="reservar_libro">Reservar libro</string>
+    <string name="recomendacion">Recuerde que dispone de 24 horas para recoger su libro en nuestras bibliotecas. ¿Está seguro que desea reservarlo?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="no_cuenta">No tengo una cuenta</string>
+    <string name="registrarme">Registrarme</string>
+
 </resources>

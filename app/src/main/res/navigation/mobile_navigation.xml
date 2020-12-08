@@ -20,10 +20,25 @@
         android:id="@+id/navigation_prestamo"
         android:name="com.alexisberrio.formulario.ui.libros.LibrosFragment"
         android:label="@string/prestamo"
-        tools:layout="@layout/fragment_libros" />
+        tools:layout="@layout/fragment_libros">
+        <action
+            android:id="@+id/action_navigation_prestamo_to_detalleFragment"
+            app:destination="@id/detalleFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_perfil"
         android:name="com.alexisberrio.formulario.ui.perfil.PerfilFragment"
         android:label="@string/mi_perfil"
         tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="com.alexisberrio.formulario.ui.detalle.DetalleFragment"
+        android:label="fragment_detalle"
+        tools:layout="@layout/fragment_detalle">
+        <argument
+            android:name="LibroSeleccionado"
+            app:argType="com.alexisberrio.formulario.data.server.Libros" />
+
+    </fragment>
+
 </navigation>

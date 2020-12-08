@@ -61,6 +61,28 @@ class PerfilFragment : Fragment() {
 
         })
 
+        val myPrestamosRef =
+            database.getReference("libros").orderByChild("userprestamo").equalTo(otro)
+        myPrestamosRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val prestamos = ArrayList<String>()
+
+                snapshot.children.forEach { childSnapchot ->
+                    println("Pasa por aca")
+                    prestamos.add(
+                        childSnapchot.child("titulo").getValue(String::class.java).toString()
+                    )
+                    for (libro in prestamos)
+                        println(libro)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
         binding.cerrarSesionButton.setOnClickListener {
             auth.signOut()
             goToLoginActivity()

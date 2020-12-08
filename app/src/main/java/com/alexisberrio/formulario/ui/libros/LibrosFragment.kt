@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alexisberrio.formulario.R
@@ -16,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 
-class LibrosFragment : Fragment() {
+class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentLibrosBinding
     var listlibros: MutableList<Libros> = mutableListOf()
@@ -37,11 +39,23 @@ class LibrosFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.librosRecyclerView.setHasFixedSize(true)
 
-        librosRVAdapter = LibrosRVAdapter(listlibros as ArrayList<Libros>)
+        librosRVAdapter = LibrosRVAdapter(listlibros as ArrayList<Libros>, this@LibrosFragment)
         binding.librosRecyclerView.adapter = librosRVAdapter
 
         cargarDesdeFirebase()
         librosRVAdapter.notifyDataSetChanged()
+
+        binding.tituloSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                librosRVAdapter.filter.filter(newText)
+                return false
+            }
+        })
+
 
     }
 
@@ -64,6 +78,11 @@ class LibrosFragment : Fragment() {
             }
         }
         myLibrosRef.addValueEventListener(postListener)
+    }
+
+    override fun onItemClick(libro: Libros) {
+        val action = LibrosFragmentDirections.actionNavigationPrestamoToDetalleFragment(libro)
+        findNavController().navigate(action)
     }
 
 

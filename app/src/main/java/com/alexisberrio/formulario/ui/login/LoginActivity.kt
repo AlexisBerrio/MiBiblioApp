@@ -11,7 +11,13 @@ import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.databinding.ActivityLoginBinding
 import com.alexisberrio.formulario.ui.bottom.BottomActivity
 import com.alexisberrio.formulario.ui.registro.RegistroActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 
 /*
 My BiblioApp
@@ -27,17 +33,32 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = LoginActivity::class.simpleName
+        private const val RC_SIGN_IN = 9001
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
+        binding.loginGoogleButton.setOnClickListener {
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleClient = GoogleSignIn.getClient(this, gso)
+
+            googleClient.signOut()
+            startActivityForResult(googleClient.signInIntent, RC_SIGN_IN)
+
+        }
+
+
         auth = FirebaseAuth.getInstance()
 
 
         // Go to RegistroActivity when button is pressed
-        binding.registraseButton.setOnClickListener {
+        binding.registrarseTextView.setOnClickListener {
             goToRegistroActivity()
         }
 
@@ -87,5 +108,43 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, BottomActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account: GoogleSignInAccount? = task.getResult(ApiException::class.java)
+                if (account != null) {
+                    Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                }
+
+            } catch (e: ApiException) {
+                Log.w(TAG, "Google sign in failed", e)
+
+            }
+
+        }
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+
+        val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                goToMainActivity()
+            } else {
+                // If sign in fails, display a message to the user.
+                Log.w(TAG, "signInWithEmail:failure", it.exception)
+                Toast.makeText(
+                    baseContext, "Authentication failed.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        }
+
     }
 }
