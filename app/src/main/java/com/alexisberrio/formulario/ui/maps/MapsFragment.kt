@@ -34,10 +34,12 @@ class MapsFragment : Fragment() {
 
         setUpMap(googleMap)
 
+        // Georeferenciación de algunas bibliotecas
         val publicaPiloto = LatLng(6.2552874, -75.5773746)
         val epm = LatLng(6.2460762, -75.5732292)
         val confenalco = LatLng(6.2487143, -75.564199)
 
+        // Marcadores personalizados para algunos lugares
         googleMap.addMarker(
             MarkerOptions().position(publicaPiloto).title("Biblioteca Pública Piloto")
         )

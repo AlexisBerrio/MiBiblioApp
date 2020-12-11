@@ -35,6 +35,7 @@ class NovedadesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentNovedadesBinding.bind(view)
 
+        // Setting del recycler view
         binding.novedadesRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.novedadesRecyclerView.setHasFixedSize(true)
@@ -46,12 +47,13 @@ class NovedadesFragment : Fragment() {
         novedadesRVAdapter.notifyDataSetChanged()
     }
 
+    // Carga la información de la tabla novedades alojada en firebase
     private fun cargarDesdeFirebase() {
 
         val database = FirebaseDatabase.getInstance()
-        val myNovedadesRef = database.getReference("novedades")
+        val myNovedadesRef = database.getReference("novedades") //Referencia a la tabla
 
-        listnovedades.clear()
+        listnovedades.clear() // Borra cualquier dato en la lista de novedades
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

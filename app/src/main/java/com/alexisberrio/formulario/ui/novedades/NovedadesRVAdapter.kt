@@ -50,6 +50,7 @@ class NovedadesRVAdapter(private var novedadesList: ArrayList<Novedades>) :
 
         }
 
+        // Convierte la fecha de formato unix a un string
         @SuppressLint("SimpleDateFormat")
         private fun unixDateToString(novedad: Novedades): String {
             val unixSeconds = novedad.fecha

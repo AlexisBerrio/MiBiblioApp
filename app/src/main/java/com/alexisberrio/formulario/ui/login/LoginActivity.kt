@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = LoginActivity::class.simpleName
-        private const val RC_SIGN_IN = 9001
+        private const val RC_SIGN_IN = 9001 // Valor usado como request code para login con Google
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
             val correo = binding.correoTextInputEditText.text.toString()
             val contrasena = binding.contrasenaTextInputEditText.text.toString()
 
+            // Verificación de campos vacíos
             when {
                 correo.isEmpty() -> binding.correoTextInputEditText.error =
                     getString(R.string.campo_vacio)
@@ -69,18 +70,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // Acceso mediante cuenta de Google
     private fun googleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
+            .requestIdToken(getString(R.string.default_web_client_id)) // Mi Token
+            .requestEmail() //Devuelve el Email asociado
             .build()
 
         val googleClient = GoogleSignIn.getClient(this, gso)
 
-        googleClient.signOut()
+        googleClient.signOut() // Cierra sesión al inicio para asegurar que no haya una iniciada
         startActivityForResult(googleClient.signInIntent, RC_SIGN_IN)
     }
 
+    // Acceso mediante cuenta creada con authentication de firebase
     private fun loginWithFirebase(correo: String, contrasena: String) {
         auth.signInWithEmailAndPassword(correo, contrasena)
             .addOnCompleteListener(this) { task ->
@@ -100,17 +103,20 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
+    // Va a la la actividad para registrar usuarios nuevos
     private fun goToRegistroActivity() {
         val intent = Intent(this, RegistroActivity::class.java)
         startActivity(intent)
     }
 
+    // Ingresa a la pantalla prncipal y limpia la pila del intent
     private fun goToMainActivity() {
         val intent = Intent(this, BottomActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
 
+    // Verifica si existe una cuenta para iniciar sesión con Google
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -131,7 +137,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-
         val credential: AuthCredential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {

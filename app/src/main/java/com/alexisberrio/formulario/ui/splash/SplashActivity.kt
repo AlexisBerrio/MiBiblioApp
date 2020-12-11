@@ -28,20 +28,24 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+
+        // Carga la animación inicial para el logo
         anim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
+        // Carga la instancia actual de firebase authentication
         auth = FirebaseAuth.getInstance()
 
-
+        // Corre la animación actual
         anim?.run {
             setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation) {}
                 override fun onAnimationEnd(animation: Animation) {
 
+                    // Veifica si hay una sesión iniciada la app
                     val auth = FirebaseAuth.getInstance().currentUser
                     if (auth == null) {
-                        goToLoginActivity()
+                        goToLoginActivity() // Si no hay una va a la actividad de login
                     } else {
-                        goToBottomActivity()
+                        goToBottomActivity() // Si existe,v a directamente a la actividad principal
                     }
                 }
 
@@ -52,6 +56,7 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
+    // Salta a la actividad con una transición y una bienvenida al usuario actual
     private fun goToBottomActivity() {
         val intent = Intent(this, BottomActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)

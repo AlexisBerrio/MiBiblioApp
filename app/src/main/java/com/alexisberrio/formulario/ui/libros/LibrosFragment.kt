@@ -35,6 +35,7 @@ class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentLibrosBinding.bind(view)
 
+        // Setting del recycler View
         binding.librosRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.librosRecyclerView.setHasFixedSize(true)
@@ -45,13 +46,14 @@ class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
         cargarDesdeFirebase()
         librosRVAdapter.notifyDataSetChanged()
 
+        // Permite filtrar libros por su autor o título haciendo uso del search View
         binding.tituloSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                librosRVAdapter.filter.filter(newText)
+                librosRVAdapter.filter.filter(newText) // Filtra mediante el adaptador del RV
                 return false
             }
         })
@@ -59,19 +61,20 @@ class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
 
     }
 
+    // Carga en el Recycler View la información de los libros que está en firebase
     private fun cargarDesdeFirebase() {
         val database = FirebaseDatabase.getInstance()
-        val myLibrosRef = database.getReference("libros")
+        val myLibrosRef = database.getReference("libros") // Referencia de los libros
 
-        listlibros.clear()
+        listlibros.clear() // Limpia la lista actual de libros
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (dato: DataSnapshot in snapshot.children) {
                     val libro = dato.getValue(Libros::class.java)
-                    libro?.let { listlibros.add(it) }
+                    libro?.let { listlibros.add(it) } // Añada cada referencia a la lista de libros
                 }
-                librosRVAdapter.notifyDataSetChanged()
+                librosRVAdapter.notifyDataSetChanged() // Actualiza el recycler view
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -80,10 +83,10 @@ class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
         myLibrosRef.addValueEventListener(postListener)
     }
 
+    // Va al detalle del libro cuando se da click en el card view de un libro
     override fun onItemClick(libro: Libros) {
         val action = LibrosFragmentDirections.actionNavigationPrestamoToDetalleFragment(libro)
         findNavController().navigate(action)
-        //findNavController().popBackStack()
     }
 
 

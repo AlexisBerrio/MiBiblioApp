@@ -1,14 +1,17 @@
 package com.alexisberrio.formulario.ui.detalle
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.alexisberrio.formulario.R
+import com.alexisberrio.formulario.data.server.Libros
 import com.alexisberrio.formulario.databinding.FragmentDetalleBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -41,7 +44,7 @@ class DetalleFragment : Fragment() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     val action = Navigation.findNavController(view)
-                    action.popBackStack()
+                    action.popBackStack() // Retorna al fragment anterior en la pila
                 }
             })
 
@@ -59,29 +62,60 @@ class DetalleFragment : Fragment() {
         if (libroDetalle.portada != "")
             Glide.with(view).load(libroDetalle.portada).into(binding.portadaImageView)
 
-        // Activa o desactiva el botón de reservar dependiendo de la disponibilidad del libro
-        if (libroDetalle.prestado == true) {
+        actualizarReserva(libroDetalle)
+
+        // Actualizar información en Database cuando se da click en el botón reservar
+        binding.detalleReservarButton.setOnClickListener {
+            val dialog = AlertDialog.Builder(context)
+                .setTitle(R.string.reservar)
+                .setMessage(R.string.recomendacion)
+                .setNegativeButton(R.string.cancelar) { view, _ ->
+                    Toast.makeText(context, "Reserva Cancelada", Toast.LENGTH_SHORT).show()
+                    view.dismiss()
+                }
+                .setPositiveButton(R.string.reservar) { view, _ ->
+                    actualizarDatabase(userId, libroDetalle)
+                    actualizarReserva(libroDetalle)
+                    Toast.makeText(context, "Libro Reservado", Toast.LENGTH_SHORT).show()
+                    view.dismiss()
+                }
+                .setCancelable(false)
+                .create()
+            dialog.show()
+
+        }
+
+    }
+
+    /*
+     Activa o desactiva el botón de reservar y cambia el texto del text view estado dependiendo
+     de la disponibilidad del libro
+     */
+    private fun actualizarReserva(libroDetalle: Libros) {
+        if (libroDetalle.prestado) { // La condición se cumple cuando el libro está prestado
             binding.detalleEstadoPrestamoTextView.setText(R.string.en_prestamo)
             binding.detalleReservarButton.isEnabled = false
         } else {
             binding.detalleEstadoPrestamoTextView.setText(R.string.disponible)
             binding.detalleReservarButton.isEnabled = true
         }
+    }
 
-        // Actualizar información en Database cuando se da click en el botón reservar
-        binding.detalleReservarButton.setOnClickListener {
 
-            val database = FirebaseDatabase.getInstance()
-            val myLibroRef = database.getReference("libros")
+    //Actualiza los datos de préstamo en la base de datos de Firebase cuando el libro es reservado
+    private fun actualizarDatabase(
+        userId: String,
+        libroDetalle: Libros
+    ) {
+        val database = FirebaseDatabase.getInstance()
+        val myLibroRef = database.getReference("libros")
 
-            val childUpdates = mutableMapOf<String, Any>()
-            childUpdates["prestado"] = true
-            childUpdates["userpestamo"] = userId
+        val childUpdates = mutableMapOf<String, Any>()
+        childUpdates["prestado"] = true // Actualiza el campo de prestado a true
+        childUpdates["userpestamo"] = userId // Actualiza el id vinculado al user que reservó
 
-            myLibroRef
-                .child(libroDetalle.id)
-                .updateChildren(childUpdates)
-        }
-
+        myLibroRef
+            .child(libroDetalle.id) // Actualiza los campos según la referencia del libro actual
+            .updateChildren(childUpdates)
     }
 }

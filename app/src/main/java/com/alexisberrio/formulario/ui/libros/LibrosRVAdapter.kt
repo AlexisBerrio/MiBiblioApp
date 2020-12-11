@@ -67,16 +67,17 @@ class LibrosRVAdapter(
 
     }
 
+    // Función que filtra libros al escribir en el search view
     override fun getFilter(): Filter {
         return object : Filter() {
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
-                    libroFilterList = librosList
+                libroFilterList = if (charSearch.isEmpty()) {
+                    librosList
                 } else {
                     val resultList = ArrayList<Libros>()
                     for (row in librosList) {
-                        if (row.titulo.toLowerCase(Locale.ROOT)
+                        if (row.titulo.toLowerCase(Locale.ROOT) // Filtra por titulo o autor
                                 .contains(charSearch.toLowerCase(Locale.ROOT)) || row.autor.toLowerCase(
                                 Locale.ROOT
                             ).contains(charSearch.toLowerCase(Locale.ROOT))
@@ -84,7 +85,7 @@ class LibrosRVAdapter(
                             resultList.add(row)
                         }
                     }
-                    libroFilterList = resultList
+                    resultList
                 }
                 val filterResults = FilterResults()
                 filterResults.values = libroFilterList

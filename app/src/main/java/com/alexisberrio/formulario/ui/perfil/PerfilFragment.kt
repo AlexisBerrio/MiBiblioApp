@@ -37,7 +37,7 @@ class PerfilFragment : Fragment() {
         binding = FragmentPerfilBinding.bind(view)
 
         auth = FirebaseAuth.getInstance()
-        val userIdActual = auth.currentUser?.uid
+        val userIdActual = auth.currentUser?.uid // Id del usuario en la sesión actual
 
         // Crear el adaptador encargado de montar los libros prestados en el Recycler View
         crearRVAdapter(userIdActual)
@@ -46,18 +46,19 @@ class PerfilFragment : Fragment() {
         val database = FirebaseDatabase.getInstance()
         cargarDatosDeUsuario(database, userIdActual)
 
-
+        // Cierra sesión y se devuelve a la pantalla de login cuando el botón es presionado
         binding.cerrarSesionButton.setOnClickListener {
             auth.signOut()
             goToLoginActivity()
         }
     }
 
+    // Carga en el fragment los datos asociados al usuario actual
     private fun cargarDatosDeUsuario(
         database: FirebaseDatabase,
         userIdActual: String?
     ) {
-        val myUserRef =
+        val myUserRef = // Busca en database el usuario con el id de la sesión actual
             database.getReference("usuarios").orderByChild("id").equalTo(userIdActual)
         myUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -77,12 +78,12 @@ class PerfilFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-
             }
 
         })
     }
 
+    // Setting del recycler view para los libros prestados por el usuario
     private fun crearRVAdapter(userIdActual: String?) {
         binding.prestamosRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -97,7 +98,7 @@ class PerfilFragment : Fragment() {
 
     private fun cargarDesdeFirebase(userIdActual: String?) {
         val database = FirebaseDatabase.getInstance()
-        val myLibrosRef =
+        val myLibrosRef = // Filtra por los libros que tengan vinculado el ID del usuario actual
             database.getReference("libros").orderByChild("userpestamo").equalTo(userIdActual)
 
         listlibros.clear()
@@ -118,7 +119,7 @@ class PerfilFragment : Fragment() {
 
     }
 
-
+    // Limpia la pila de intents y se dirige a la actividad login
     private fun goToLoginActivity() {
         val intent = Intent(this@PerfilFragment.context, LoginActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

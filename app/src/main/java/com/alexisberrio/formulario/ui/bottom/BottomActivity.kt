@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class BottomActivity : AppCompatActivity() {
 
+    // Parámetros para controlar la navegación del los fragments distintos a los del bottomNavigation
     private val navController2 by lazy { findNavController(R.id.nav_host_fragment) }
     private val appBarConfiguration2 by lazy { AppBarConfiguration(navController2.graph) }
 
@@ -21,6 +22,7 @@ class BottomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom)
 
+        // Setting del bottom navigation
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 
         val navController: NavController = findNavController(R.id.nav_host_fragment)

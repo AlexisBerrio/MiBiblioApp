@@ -38,6 +38,7 @@ class RegistroActivity : AppCompatActivity() {
 
         binding.registrarButton.setOnClickListener {
 
+            // Toma los valores actuales de los edit text
             val correo = binding.correoEditText.text.toString()
             val contrasena = binding.contrasenaEditText.text.toString()
             val nombre = binding.nombreEditText.text.toString()
@@ -76,6 +77,7 @@ class RegistroActivity : AppCompatActivity() {
 
     }
 
+    // Registra el usuario actual en la base de datos de firebase authentication
     private fun registroEnFirebase(
         correo: String,
         contrasena: String,
@@ -103,6 +105,7 @@ class RegistroActivity : AppCompatActivity() {
             }
     }
 
+    // Registra el usuario actual en la base de datos de firebase realtime database
     private fun crearUsuarioEnDataBase(
         uid: String?,
         correo: String,
@@ -115,7 +118,7 @@ class RegistroActivity : AppCompatActivity() {
         val usuario = Usuario(uid, correo, nombre, telefono, genero)
 
         uid?.let { myUsuarioRef.child(uid).setValue(usuario) }
-        auth.signOut()
+        auth.signOut() // Cierra la sesión actual iniciada por default
         goToLoginActivity()
     }
 

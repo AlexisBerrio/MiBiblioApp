@@ -17,5 +17,4 @@ class EncuentranosFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_encuentranos, container, false)
     }
 
-    companion object
 }
