@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alexisberrio.formulario.R
+import com.alexisberrio.formulario.data.server.Libros
 import com.alexisberrio.formulario.databinding.FragmentPerfilBinding
 import com.alexisberrio.formulario.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +22,8 @@ class PerfilFragment : Fragment() {
 
     private lateinit var binding: FragmentPerfilBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var prestamosRVAadapter: PrestamosRVAdapter
+    var listlibros: MutableList<Libros> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +37,28 @@ class PerfilFragment : Fragment() {
         binding = FragmentPerfilBinding.bind(view)
 
         auth = FirebaseAuth.getInstance()
-        val otro = auth.currentUser?.uid
+        val userIdActual = auth.currentUser?.uid
 
+        // Crear el adaptador encargado de montar los libros prestados en el Recycler View
+        crearRVAdapter(userIdActual)
+
+        // Cargar los datos de usuario referentes al id de la sesión iniciada (Nombre, correo, imagen)
         val database = FirebaseDatabase.getInstance()
+        cargarDatosDeUsuario(database, userIdActual)
+
+
+        binding.cerrarSesionButton.setOnClickListener {
+            auth.signOut()
+            goToLoginActivity()
+        }
+    }
+
+    private fun cargarDatosDeUsuario(
+        database: FirebaseDatabase,
+        userIdActual: String?
+    ) {
         val myUserRef =
-            database.getReference("usuarios").orderByChild("id").equalTo(otro)
+            database.getReference("usuarios").orderByChild("id").equalTo(userIdActual)
         myUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach { childSnapshot ->
@@ -58,35 +80,42 @@ class PerfilFragment : Fragment() {
 
             }
 
-
         })
+    }
 
-        val myPrestamosRef =
-            database.getReference("libros").orderByChild("userprestamo").equalTo(otro)
-        myPrestamosRef.addListenerForSingleValueEvent(object : ValueEventListener {
+    private fun crearRVAdapter(userIdActual: String?) {
+        binding.prestamosRecyclerView.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.prestamosRecyclerView.setHasFixedSize(true)
+
+        prestamosRVAadapter = PrestamosRVAdapter(listlibros as ArrayList<Libros>)
+        binding.prestamosRecyclerView.adapter = prestamosRVAadapter
+
+        cargarDesdeFirebase(userIdActual)
+        prestamosRVAadapter.notifyDataSetChanged()
+    }
+
+    private fun cargarDesdeFirebase(userIdActual: String?) {
+        val database = FirebaseDatabase.getInstance()
+        val myLibrosRef =
+            database.getReference("libros").orderByChild("userpestamo").equalTo(userIdActual)
+
+        listlibros.clear()
+
+        val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val prestamos = ArrayList<String>()
-
-                snapshot.children.forEach { childSnapchot ->
-                    println("Pasa por aca")
-                    prestamos.add(
-                        childSnapchot.child("titulo").getValue(String::class.java).toString()
-                    )
-                    for (libro in prestamos)
-                        println(libro)
+                for (dato: DataSnapshot in snapshot.children) {
+                    val libro = dato.getValue(Libros::class.java)
+                    libro?.let { listlibros.add(it) }
                 }
+                prestamosRVAadapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-
             }
-
-        })
-
-        binding.cerrarSesionButton.setOnClickListener {
-            auth.signOut()
-            goToLoginActivity()
         }
+        myLibrosRef.addValueEventListener(postListener)
+
     }
 
 

@@ -30,7 +30,7 @@
     <string name="buscar_titulo">Buscar por título</string>
     <string name="anio_publicacion">Año de publicación:</string>
     <string name="reservar">Reservar</string>
-    <string name="historial">Historial de préstamos</string>
+    <string name="historial">Préstamos actuales</string>
     <string name="map_descripcion">En este apartado encontrará la ubicación de las bibliotecas que están vinculadas a nuestra red.</string>
     <string name="buscar_autor_o_titulo">Buscar por título o autor</string>
     <string name="estado">Estado:</string>

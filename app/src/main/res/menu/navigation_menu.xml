@@ -13,10 +13,12 @@
         <item
             android:id="@+id/navigation_encuentranos"
             android:icon="@drawable/ic_map"
+
             android:title="@string/encuentranos" />
         <item
             android:id="@+id/navigation_perfil"
             android:icon="@drawable/ic_profile"
+
             android:title="@string/mi_perfil" />
 
     </group>

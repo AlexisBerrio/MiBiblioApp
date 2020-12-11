@@ -54,9 +54,6 @@ class LibrosRVAdapter(
             if (libro.portada != "")
                 Glide.with(itemView).load(libro.portada).into(binding.libroImageView)
 
-
-
-
             binding.prestamosCardView.setOnClickListener {
                 onItemClickListener.onItemClick(libro)
             }

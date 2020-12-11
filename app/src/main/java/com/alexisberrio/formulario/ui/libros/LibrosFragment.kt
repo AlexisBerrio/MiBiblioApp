@@ -83,6 +83,7 @@ class LibrosFragment : Fragment(), LibrosRVAdapter.OnItemClickListener {
     override fun onItemClick(libro: Libros) {
         val action = LibrosFragmentDirections.actionNavigationPrestamoToDetalleFragment(libro)
         findNavController().navigate(action)
+        //findNavController().popBackStack()
     }
 
 

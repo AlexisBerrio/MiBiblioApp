@@ -25,7 +25,6 @@ Created by:
             Alexis Berrio Arenas
  */
 
-//TODO INICIO DE SESIÓN CON GOOGLE
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
@@ -40,22 +39,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
+        // Login With Google Account
         binding.loginGoogleButton.setOnClickListener {
-            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build()
-
-            val googleClient = GoogleSignIn.getClient(this, gso)
-
-            googleClient.signOut()
-            startActivityForResult(googleClient.signInIntent, RC_SIGN_IN)
-
+            googleLogin()
         }
 
-
         auth = FirebaseAuth.getInstance()
-
 
         // Go to RegistroActivity when button is pressed
         binding.registrarseTextView.setOnClickListener {
@@ -78,6 +67,18 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun googleLogin() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        val googleClient = GoogleSignIn.getClient(this, gso)
+
+        googleClient.signOut()
+        startActivityForResult(googleClient.signInIntent, RC_SIGN_IN)
     }
 
     private fun loginWithFirebase(correo: String, contrasena: String) {

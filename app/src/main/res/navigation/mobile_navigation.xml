@@ -33,7 +33,6 @@
     <fragment
         android:id="@+id/detalleFragment"
         android:name="com.alexisberrio.formulario.ui.detalle.DetalleFragment"
-        android:label="fragment_detalle"
         tools:layout="@layout/fragment_detalle">
         <argument
             android:name="LibroSeleccionado"

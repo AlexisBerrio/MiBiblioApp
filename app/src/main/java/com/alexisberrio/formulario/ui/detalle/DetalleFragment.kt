@@ -5,24 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.alexisberrio.formulario.R
 import com.alexisberrio.formulario.databinding.FragmentDetalleBinding
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class DetalleFragment : Fragment() {
 
     private lateinit var binding: FragmentDetalleBinding
     private lateinit var auth: FirebaseAuth
-
-    override fun onResume() {
-        super.onResume()
-        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,29 +31,35 @@ class DetalleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentDetalleBinding.bind(view)
 
+        // Cargar el id del usuario actual
         auth = FirebaseAuth.getInstance()
         val userId = auth.currentUser?.uid.toString()
 
-        //TODO Boton de atras
+        // Retornar a la lista de libros al presionar el botón de Back
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    activity?.onBackPressed()
+                    val action = Navigation.findNavController(view)
+                    action.popBackStack()
                 }
             })
 
+        // Cargar referencia del libro actual
         val args: DetalleFragmentArgs by navArgs()
         val libroDetalle = args.LibroSeleccionado
 
 
+        // Cargar la información de Database en el fragmento
         binding.detalleAutorTextView.text = libroDetalle.autor
         binding.detalleTituloTextView.text = libroDetalle.titulo
         binding.detalleYearTextView.text = libroDetalle.anio.toString()
         binding.detalleSinopsisTextView.text = libroDetalle.sinopsis
+
         if (libroDetalle.portada != "")
             Glide.with(view).load(libroDetalle.portada).into(binding.portadaImageView)
 
+        // Activa o desactiva el botón de reservar dependiendo de la disponibilidad del libro
         if (libroDetalle.prestado == true) {
             binding.detalleEstadoPrestamoTextView.setText(R.string.en_prestamo)
             binding.detalleReservarButton.isEnabled = false
@@ -65,8 +67,9 @@ class DetalleFragment : Fragment() {
             binding.detalleEstadoPrestamoTextView.setText(R.string.disponible)
             binding.detalleReservarButton.isEnabled = true
         }
-        /*binding.detalleReservarButton.setOnClickListener {
-//TODO actualizar datos
+
+        // Actualizar información en Database cuando se da click en el botón reservar
+        binding.detalleReservarButton.setOnClickListener {
 
             val database = FirebaseDatabase.getInstance()
             val myLibroRef = database.getReference("libros")
@@ -74,13 +77,11 @@ class DetalleFragment : Fragment() {
             val childUpdates = mutableMapOf<String, Any>()
             childUpdates["prestado"] = true
             childUpdates["userpestamo"] = userId
-            //libroDetalle
-            // updateLibro?.let { myLibroRef.child(it).updateChildren(childUpdates) }
 
-*//*            myLibroRef
-                .child("prestado")
-                .child("userpestamo")
-                .updateChildren(childUpdates)*//*
-        }*/
+            myLibroRef
+                .child(libroDetalle.id)
+                .updateChildren(childUpdates)
+        }
+
     }
 }

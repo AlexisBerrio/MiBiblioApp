@@ -1,22 +1,21 @@
 package com.alexisberrio.formulario.ui.bottom
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alexisberrio.formulario.R
-import com.alexisberrio.formulario.ui.perfil.PerfilFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class BottomActivity : AppCompatActivity() {
 
-    private lateinit var mail: String
-    private lateinit var pass: String
+    private val navController2 by lazy { findNavController(R.id.nav_host_fragment) }
+    private val appBarConfiguration2 by lazy { AppBarConfiguration(navController2.graph) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,18 +37,10 @@ class BottomActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val datosrecibidos = intent.extras
-        mail = datosrecibidos?.getString("correo").toString()
-        pass = datosrecibidos?.getString("contraseña").toString()
-
-        val intent = Intent(this, PerfilFragment::class.java)
-        intent.putExtra("correo", mail)
-        intent.putExtra("contraseña", pass)
-
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
+    override fun onSupportNavigateUp(): Boolean {
+        return navController2.navigateUp(appBarConfiguration2) || super.onSupportNavigateUp()
     }
+
 }
